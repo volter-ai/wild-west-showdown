@@ -1,5 +1,14 @@
 {
       "project_type": "ige5_game",
       "name": "wild-west-showdown",
-      "description": "A multiplayer wild west themed game"
+      "description": "A multiplayer wild west themed game where players compete in a showdown to be the last cowboy standing.",
+      "version": "1.0.0",
+      "author": "Volter AI",
+      "license": "ISC",
+      "main": "src/index.js",
+      "dependencies": {
+        "@volter/ige5": "latest",
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0"
+      }
     }
