@@ -1,0 +1,11 @@
+{
+      "name": "wild-west-showdown",
+      "version": "1.0.0",
+      "description": "A multiplayer wild west themed game",
+      "main": "index.js",
+      "scripts": {
+        "start": "echo 'No start script defined'"
+      },
+      "author": "",
+      "license": "ISC"
+    }
