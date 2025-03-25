@@ -1,0 +1,44 @@
+name: Deepfrai deploy
+
+on:
+  push:
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+'
+
+jobs:
+#  wait-for-terraform:
+#    name: Wait for Terraform
+#    runs-on: ubuntu-latest
+#    timeout-minutes: 30
+#    steps:
+#      - name: Wait for Game Terraform Apply
+#        uses: lewagon/wait-on-check-action@v1.3.4
+#        with:
+#          ref: main
+#          check-name: 'deploy_dev / Terraform Apply for development'
+#          repo-token: ${{ secrets.GITHUB_TOKEN }}
+#          wait-interval: 10  # check every 10 seconds
+
+  build:
+    name: Build
+#    needs: wait-for-terraform
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Bun Runtime
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Install Dependencies
+        run: bun install
+
+      - name: Deepfrai Deploy
+        env:
+          DEEPFRAI_SUPABASE_URL: ${{ secrets.DEEPFRAI_SUPABASE_URL }}
+          DEEPFRAI_SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.DEEPFRAI_SUPABASE_SERVICE_ROLE_KEY }}
+        run: bun run deepfrai-deploy

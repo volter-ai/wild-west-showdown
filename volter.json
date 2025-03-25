@@ -1,0 +1,22 @@
+{
+  "game_name": "wild_west_showdown",
+  "game_domain": "wild_west_showdown",
+  "project_type": "ige5_game",
+  "game_url": "",
+  "default_resolution": [
+    390,
+    844
+  ],
+  "include": [
+    "assets",
+    "src",
+    "public",
+    "package.json",
+    ".babelrc",
+    "volter.json",
+    "Dockerfile",
+    "build.sh"
+  ],
+  "run_commands": "BROWSER=none bun start",
+  "default_port": 8000
+}
