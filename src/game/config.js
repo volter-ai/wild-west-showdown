@@ -11,7 +11,7 @@ const getGameId = () => {
   }
   
   // Fall back to default
-  return 'voltarr-v1';
+  return 'wild-west-showdown-v1';
 };
 
 // Export the getter function instead of the value
@@ -19,4 +19,4 @@ export const GAME_ID = getGameId();
 
 // Player count configuration
 export const MIN_PLAYERS = 1;
-export const MAX_PLAYERS = 3;
+export const MAX_PLAYERS = 8;
