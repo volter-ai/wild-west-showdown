@@ -18,5 +18,7 @@
     "build.sh"
   ],
   "run_commands": "BROWSER=none bun start",
-  "default_port": 8000
+  "default_port": 8000,
+  "description": "Wild West Showdown is a thrilling multiplayer IO game set in the rugged frontier of the wild west. Players take on the role of gunslingers, competing in intense shootouts to be the last one standing. With a variety of weapons and power-ups, strategic movement, and environmental challenges, every match is a test of skill and wits.",
+  "page_body": "Welcome to Wild West Showdown, where the frontier town becomes your battleground! Choose from multiple character types like the Sheriff, Outlaw, or Bounty Hunter, each with unique abilities. Arm yourself with classic wild west weapons such as revolvers, shotguns, and dynamite. Navigate through a dynamic environment filled with hazards like stampeding cattle and saloon brawls. Collect gold to purchase upgrades and gain an edge over your opponents. Experience different game modes including Deathmatch, Gold Rush, and Wanted, each offering a unique challenge. The game supports 4-8 players per match, with bots filling in empty slots. Keep track of your performance on the leaderboard and aim to be the top gunslinger. The day/night cycle adds an extra layer of strategy, affecting visibility and gameplay. Stay alert, aim true, and may the best gunslinger win!"
 }
