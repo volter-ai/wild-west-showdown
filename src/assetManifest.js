@@ -22,6 +22,11 @@ export const ASSETS = {
       path: 'assets/backgrounds/night.png',
       width: 1024,
       height: 1024
+    },
+    saloon: {
+      path: 'assets/backgrounds/saloon.png',
+      width: 1024,
+      height: 768
     }
   },
   characters: {
