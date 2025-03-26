@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { PLAYER } from '../playerData';
 import { MIN_PLAYERS, MAX_PLAYERS } from './config';
 import { BOT_NAMES } from './botNames';
+import { ASSETS } from '../assetManifest';
 
 const WesternButton = ({ onClick, children, className = '', disabled = false }) => (
   <button
