@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Joystick } from './CommonUI';
+import { ASSETS } from '../assetManifest';
 
 const HUD = ({ gameState, currentUserId }) => {
   const currentPlayer = gameState.entities[currentUserId];
@@ -23,7 +24,7 @@ const HUD = ({ gameState, currentUserId }) => {
         <div className="flex gap-4">
           <p>Players: {alivePlayers}/{totalPlayers}</p>
           <p>Time: {timeRemaining}s</p>
-          <p>{gameState.dayNightCycle === 'day' ? '☀️' : '🌙'}</p>
+          <p>{gameState.dayNightCycle === 'day' ? 'Day' : 'Night'}</p>
         </div>
       </div>
     </div>
@@ -32,10 +33,10 @@ const HUD = ({ gameState, currentUserId }) => {
 
 const WeaponSelector = ({ currentWeapon, onSelectWeapon }) => {
   const weapons = [
-    { id: 'revolver', name: 'Revolver', emoji: '🔫' },
-    { id: 'shotgun', name: 'Shotgun', emoji: '🔫' },
-    { id: 'rifle', name: 'Rifle', emoji: '🔫' },
-    { id: 'dynamite', name: 'Dynamite', emoji: '💣' }
+    { id: 'revolver', name: 'Revolver', asset: ASSETS.weapons.revolver },
+    { id: 'shotgun', name: 'Shotgun', asset: ASSETS.weapons.shotgun },
+    { id: 'rifle', name: 'Rifle', asset: ASSETS.weapons.rifle },
+    { id: 'dynamite', name: 'Dynamite', asset: ASSETS.weapons.dynamite }
   ];
   
   return (
@@ -50,7 +51,9 @@ const WeaponSelector = ({ currentWeapon, onSelectWeapon }) => {
           onClick={() => onSelectWeapon(weapon.id)}
         >
           <div className="flex flex-col items-center">
-            <span className="text-2xl">{weapon.emoji}</span>
+            <div className="w-8 h-8 flex items-center justify-center">
+              <img src={weapon.asset.path} alt={weapon.name} className="max-w-full max-h-full" />
+            </div>
             <span className="text-xs text-white">{weapon.name}</span>
           </div>
         </div>
@@ -259,7 +262,9 @@ function GameUI({ gameState, gameInterface, onFinishGame }) {
         }}
         onPointerDown={handleShoot}
       >
-        <div className="text-white text-2xl">🔫</div>
+        <div className="w-8 h-8">
+          <img src={ASSETS.ui.shoot.path} alt="Shoot" className="w-full h-full" />
+        </div>
       </div>
       
       {/* Reload button */}
@@ -274,7 +279,9 @@ function GameUI({ gameState, gameInterface, onFinishGame }) {
         }}
         onPointerDown={handleReload}
       >
-        <div className="text-white text-2xl">🔄</div>
+        <div className="w-8 h-8">
+          <img src={ASSETS.ui.reload.path} alt="Reload" className="w-full h-full" />
+        </div>
       </div>
       
       {/* Weapon selector */}
