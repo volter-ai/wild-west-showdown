@@ -1,21 +1,22 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { ASSETS } from '../assetManifest';
 
 const BASE_Z_INDEX = -2000;
 
 const Sprite = React.forwardRef(({
-  emoji,
+  src,
   size = 40,
   style = {},
   className = '',
   ...props
 }, ref) => {
+  const aspectRatio = src ? src.width / src.height : 1;
   return (
     <div
       ref={ref}
       className={className}
       style={{
-        fontSize: `${size}px`,
-        lineHeight: 1,
+        width: `${size * aspectRatio}px`,
         height: `${size}px`,
         display: 'flex',
         alignItems: 'center',
@@ -24,7 +25,17 @@ const Sprite = React.forwardRef(({
       }}
       {...props}
     >
-      {emoji}
+      {src ? (
+        <img 
+          src={src.path}
+          style={{
+            width: '100%',
+            height: '100%',
+            objectFit: 'contain'
+          }}
+          alt=""
+        />
+      ) : null}
     </div>
   );
 });
@@ -72,62 +83,59 @@ const HealthBar = ({ current, max, width = 40 }) => {
 };
 
 const Bullet = ({ type, style }) => {
-  let emoji = '•';
-  let size = 20;
+  let bulletAsset;
   
   switch (type) {
     case 'revolver':
-      emoji = '•';
-      size = 20;
+      bulletAsset = ASSETS.bullets.revolver;
       break;
     case 'shotgun':
-      emoji = '∴';
-      size = 15;
+      bulletAsset = ASSETS.bullets.shotgun;
       break;
     case 'rifle':
-      emoji = '⁍';
-      size = 25;
+      bulletAsset = ASSETS.bullets.rifle;
       break;
     case 'dynamite':
-      emoji = '💣';
-      size = 30;
+      bulletAsset = ASSETS.bullets.dynamite;
       break;
     default:
-      emoji = '•';
+      bulletAsset = ASSETS.bullets.revolver;
   }
   
-  return <Sprite emoji={emoji} size={size} style={style} />;
+  const size = type === 'dynamite' ? 30 : type === 'rifle' ? 25 : type === 'shotgun' ? 15 : 20;
+  
+  return <Sprite src={bulletAsset} size={size} style={style} />;
 };
 
 const PowerUp = ({ type }) => {
-  let emoji = '🔮';
+  let powerUpAsset;
   
   switch (type) {
     case 'health':
-      emoji = '❤️';
+      powerUpAsset = ASSETS.powerUps.health;
       break;
     case 'speed':
-      emoji = '👢';
+      powerUpAsset = ASSETS.powerUps.speed;
       break;
     case 'quickReload':
-      emoji = '⚡';
+      powerUpAsset = ASSETS.powerUps.quickReload;
       break;
     default:
-      emoji = '🔮';
+      powerUpAsset = ASSETS.powerUps.health;
   }
   
   return (
     <div className="animate-bounce">
-      <Sprite emoji={emoji} size={30} />
+      <Sprite src={powerUpAsset} size={30} />
       <Shadow width={15} height={4} />
     </div>
   );
 };
 
-const Gold = ({ value }) => {
+const Gold = () => {
   return (
     <div className="animate-pulse">
-      <Sprite emoji="💰" size={25} />
+      <Sprite src={ASSETS.items.gold} size={25} />
       <Shadow width={15} height={4} />
     </div>
   );
@@ -197,28 +205,18 @@ function GameStage({ gameState, gameInterface }) {
   };
 
   // Get background based on day/night cycle
-  const getBackgroundStyle = () => {
-    if (gameState.dayNightCycle === 'day') {
-      return 'bg-gradient-to-b from-blue-500 to-yellow-200';
-    } else {
-      return 'bg-gradient-to-b from-indigo-900 to-purple-900';
-    }
+  const getBackgroundAsset = () => {
+    return gameState.dayNightCycle === 'day' ? ASSETS.backgrounds.day : ASSETS.backgrounds.night;
   };
 
-  // Get character emoji based on type and state
-  const getCharacterEmoji = (entity) => {
-    if (entity.isDead) return '💀';
+  // Get character asset based on type and state
+  const getCharacterAsset = (entity) => {
+    if (entity.isDead) return ASSETS.characters.dead;
     
-    const baseEmoji = {
-      sheriff: '🤠',
-      outlaw: '🦹',
-      bountyHunter: '🧙'
-    }[entity.characterType] || '🤠';
+    if (entity.isShooting) return ASSETS.actions.shooting;
+    if (entity.isReloading) return ASSETS.actions.reloading;
     
-    if (entity.isShooting) return '🔫';
-    if (entity.isReloading) return '🔄';
-    
-    return baseEmoji;
+    return ASSETS.characters[entity.characterType] || ASSETS.characters.sheriff;
   };
 
   return (
@@ -228,9 +226,16 @@ function GameStage({ gameState, gameInterface }) {
       onPointerMove={handlePointerMove}
       onPointerDown={handlePointerDown}
     >
+      {/* Background */}
       <div
-        className={`h-full w-full relative ${getBackgroundStyle()} overflow-hidden`}
-        style={{ zIndex: BASE_Z_INDEX, userSelect: 'none' }}
+        className="h-full w-full absolute"
+        style={{ 
+          zIndex: BASE_Z_INDEX,
+          backgroundImage: `url(${getBackgroundAsset().path})`,
+          backgroundSize: 'cover',
+          backgroundPosition: `${-camera.x % getBackgroundAsset().width}px ${-camera.y % getBackgroundAsset().height}px`,
+          userSelect: 'none'
+        }}
       />
       
       {/* Game World Border */}
@@ -261,7 +266,7 @@ function GameStage({ gameState, gameInterface }) {
               zIndex: Math.floor(y) + BASE_Z_INDEX,
             }}
           >
-            <Sprite emoji="🏛️" size={80} />
+            <Sprite src={ASSETS.buildings.saloon} size={80} />
           </div>
         );
       })}
@@ -280,7 +285,7 @@ function GameStage({ gameState, gameInterface }) {
               zIndex: Math.floor(y) + BASE_Z_INDEX,
             }}
           >
-            <Sprite emoji="🌵" size={60} />
+            <Sprite src={ASSETS.buildings.cactus} size={60} />
           </div>
         );
       })}
@@ -298,7 +303,7 @@ function GameStage({ gameState, gameInterface }) {
               zIndex: Math.floor(gold.y) + BASE_Z_INDEX + 1,
             }}
           >
-            <Gold value={gold.value} />
+            <Gold />
           </div>
         )
       ))}
@@ -379,7 +384,7 @@ function GameStage({ gameState, gameInterface }) {
                 }}
               >
                 <Sprite
-                  emoji={getCharacterEmoji(entity)}
+                  src={getCharacterAsset(entity)}
                   size={40}
                   className={entity.state === 'walking' ? 'animate-bounce' : ''}
                 />
@@ -390,13 +395,13 @@ function GameStage({ gameState, gameInterface }) {
               {/* Power-up indicators */}
               {entity.speedBoost > 0 && (
                 <div style={{ position: 'absolute', top: '-20px', right: '-15px' }}>
-                  <Sprite emoji="👢" size={15} />
+                  <Sprite src={ASSETS.powerUps.speed} size={15} />
                 </div>
               )}
               
               {entity.quickReload > 0 && (
                 <div style={{ position: 'absolute', top: '-20px', left: '-15px' }}>
-                  <Sprite emoji="⚡" size={15} />
+                  <Sprite src={ASSETS.powerUps.quickReload} size={15} />
                 </div>
               )}
             </div>
