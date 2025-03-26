@@ -1,8 +1,6 @@
+# Wild West Showdown
 
-        # Wild West Showdown
-    
-        A multiplayer IO game set in the wild west where players compete as gunslingers in a frontier town.
-    
+# Core
         ## Core Gameplay
         - Players control gunslingers in a top-down 2D environment
         - Move around the map to collect weapons, power-ups, and gold
@@ -34,4 +32,3 @@
         - Gold collected
         - Mini-map showing player locations
         - Timer for round duration
-        
