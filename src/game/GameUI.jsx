@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Joystick } from './CommonUI';
 import { ASSETS } from '../assetManifest';
+import { trackGameAction, trackAdWatch, trackGoldCollected } from '../analytics';
+import { showRewardedAd } from '../plugins/wortal';
 
 const WesternButton = ({ onClick, children, className = '', disabled = false }) => (
   <button
@@ -314,6 +316,98 @@ const GameOverModal = ({ results, onFinish }) => {
   );
 };
 
+const FreeGoldButton = ({ gameState, gameInterface, currentUserId }) => {
+  const [cooldown, setCooldown] = useState(0);
+  const [isWatchingAd, setIsWatchingAd] = useState(false);
+  
+  // Check for existing cooldown in localStorage
+  useState(() => {
+    const storedCooldown = localStorage.getItem('freeGoldCooldown');
+    if (storedCooldown) {
+      const cooldownTime = parseInt(storedCooldown, 10);
+      const currentTime = Date.now();
+      if (cooldownTime > currentTime) {
+        setCooldown(Math.ceil((cooldownTime - currentTime) / 1000));
+      }
+    }
+  });
+  
+  // Update cooldown timer
+  useState(() => {
+    if (cooldown <= 0) return;
+    
+    const timer = setInterval(() => {
+      setCooldown(prev => {
+        if (prev <= 1) {
+          clearInterval(timer);
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+    
+    return () => clearInterval(timer);
+  });
+  
+  const handleWatchAd = () => {
+    if (cooldown > 0 || isWatchingAd) return;
+    
+    setIsWatchingAd(true);
+    trackAdWatch('rewarded', { reason: 'free_gold' });
+    
+    showRewardedAd(
+      // Ad start callback
+      () => {
+        console.log('Ad started');
+      },
+      // Ad complete callback
+      () => {
+        // Give player 100 gold
+        const entity = gameState.entities[currentUserId];
+        if (entity) {
+          entity.gold += 100;
+          trackGoldCollected(100, { source: 'ad_reward' });
+          
+          // Set cooldown (5 minutes)
+          const cooldownTime = Date.now() + (5 * 60 * 1000);
+          localStorage.setItem('freeGoldCooldown', cooldownTime.toString());
+          setCooldown(5 * 60);
+        }
+        setIsWatchingAd(false);
+      }
+    );
+  };
+  
+  // Format cooldown time as MM:SS
+  const formatTime = (seconds) => {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+  };
+  
+  return (
+    <div
+      className="absolute top-16 left-4 overflow-hidden"
+      style={{ userSelect: 'none' }}
+    >
+      <WesternButton
+        onClick={handleWatchAd}
+        disabled={cooldown > 0 || isWatchingAd}
+        className="flex items-center gap-2"
+      >
+        <img src={ASSETS.items.gold.path} alt="Gold" className="w-5 h-5" />
+        {cooldown > 0 ? (
+          <span>Free Gold ({formatTime(cooldown)})</span>
+        ) : isWatchingAd ? (
+          <span>Loading Ad...</span>
+        ) : (
+          <span>Get 100 Free Gold</span>
+        )}
+      </WesternButton>
+    </div>
+  );
+};
+
 function GameUI({ gameState, gameInterface, onFinishGame }) {
   const [, forceUpdate] = useState();
   const currentPlayer = gameState.entities[gameInterface.userId];
@@ -368,6 +462,13 @@ function GameUI({ gameState, gameInterface, onFinishGame }) {
       <HUD gameState={gameState} currentUserId={gameInterface.userId} />
       
       <MiniMap gameState={gameState} currentUserId={gameInterface.userId} />
+      
+      {/* Free Gold Button */}
+      <FreeGoldButton 
+        gameState={gameState} 
+        gameInterface={gameInterface} 
+        currentUserId={gameInterface.userId} 
+      />
       
       <Joystick onMove={handleMove} position={{ bottom: '20px', left: '20px' }} />
       
