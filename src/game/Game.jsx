@@ -8,6 +8,7 @@ import Lobby from './Lobby';
 import Matchmaking from './Matchmaking';
 import { LEVELS } from './data';
 import BotController from './BotController';
+import { initializeAnalytics, trackPageNavigation, trackGameStart, trackGameEnd } from '../analytics';
 
 // Fixed game dimensions
 const GAME_WIDTH = 390;
@@ -24,6 +25,12 @@ function Game({ app, levelId = 'level1', onFinishGame, singlePlayer = true }) {
   const renderer = useRef(null);
   const containerRef = useRef(null);
   const lastUpdateTime = useRef(performance.now());
+
+  // Initialize analytics when component mounts
+  useEffect(() => {
+    initializeAnalytics();
+    trackPageNavigation('game', { level: levelId });
+  }, [levelId]);
 
   // Calculate the scale factor based on the container size
   const updateDimensions = () => {
@@ -95,6 +102,9 @@ function Game({ app, levelId = 'level1', onFinishGame, singlePlayer = true }) {
 
     lastUpdateTime.current = performance.now();
     setGameStarted(true);
+    
+    // Track game start
+    trackGameStart({ level: levelId });
   };
 
   // Initialize the game interface
@@ -172,6 +182,16 @@ function Game({ app, levelId = 'level1', onFinishGame, singlePlayer = true }) {
   }, [gameStarted]);
 
   const handleGameFinish = (...args) => {
+    // Track game end
+    if (gameState) {
+      const playerEntity = gameState.entities[gameInterfaceRef.current?.userId];
+      trackGameEnd({
+        level: levelId,
+        score: playerEntity?.gold || 0,
+        survived: playerEntity ? !playerEntity.isDead : false
+      });
+    }
+    
     if (!singlePlayer) {
       gameInterfaceRef.current.sendGameFinish();
     }
