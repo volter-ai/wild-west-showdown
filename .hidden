@@ -1,0 +1,7 @@
+**/dist
+build
+node_modules
+.venv
+venv
+.git
+**/.pytest_cache

@@ -1,0 +1,55 @@
+{
+  "name": "redlight_greenlight",
+  "version": "0.1.0",
+  "private": true,
+  "homepage": ".",
+  "dependencies": {
+    "an-array-of-english-words": "^2.0.0",
+    "box2d.js": "^1.0.4",
+    "bun": "^1.1.29",
+    "concurrently": "^9.1.2",
+    "framer-motion": "^11.11.17",
+    "gsap": "^3.12.5",
+    "howler": "^2.2.4",
+    "lucide-react": "^0.438.0",
+    "planck-js": "^1.2.0",
+    "react": "^18.3.1",
+    "react-beautiful-dnd": "^13.1.1",
+    "react-dom": "^18.3.1",
+    "react-scripts": "^5.0.1",
+    "socket.io-client": "^4.8.1"
+  },
+  "scripts": {
+    "start": "BROWSER=none && cp -r assets public/ && react-scripts start",
+    "build": "cp -r assets public/ && react-scripts build && mkdir -p deploy/dist && rm -rf deploy/dist && mv build deploy/dist",
+    "test": "jest",
+    "test:all": "jest --verbose",
+    "eject": "react-scripts eject",
+    "deepfrai-deploy": "npx ts-node ./deployToDeepfrai.ts"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.22.5",
+    "@types/node": "^20.10.5",
+    "jest": "^29.5.0",
+    "serve": "^14.0.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^4.9.5"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.jsx?$": "babel-jest"
+    }
+  }
+}
