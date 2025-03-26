@@ -52,7 +52,8 @@ const Shadow = ({ width = 20, height = 6 }) => (
       height: `${height}px`,
       backgroundColor: 'rgba(0,0,0,0.3)',
       borderRadius: '50%',
-      transform: 'translate(-50%, -50%)'
+      transform: 'translate(-50%, -50%)',
+      filter: 'blur(1px)'
     }}
   />
 );
@@ -67,7 +68,8 @@ const HealthBar = ({ current, max, width = 40 }) => {
         backgroundColor: 'rgba(0,0,0,0.5)',
         borderRadius: '2px',
         overflow: 'hidden',
-        marginBottom: '2px'
+        marginBottom: '2px',
+        border: '1px solid rgba(255,255,255,0.2)'
       }}
     >
       <div
@@ -75,7 +77,8 @@ const HealthBar = ({ current, max, width = 40 }) => {
           width: `${percentage}%`,
           height: '100%',
           backgroundColor: percentage > 50 ? '#4CAF50' : percentage > 25 ? '#FFC107' : '#F44336',
-          transition: 'width 0.2s'
+          transition: 'width 0.2s',
+          boxShadow: 'inset 0 0 3px rgba(255,255,255,0.3)'
         }}
       />
     </div>
@@ -247,6 +250,7 @@ function GameStage({ gameState, gameInterface }) {
           width: gameState.worldSize.width,
           height: gameState.worldSize.height,
           border: '4px solid rgba(139, 69, 19, 0.8)',
+          boxShadow: 'inset 0 0 20px rgba(0,0,0,0.3)',
           zIndex: BASE_Z_INDEX + 1,
         }}
       />
@@ -264,6 +268,7 @@ function GameStage({ gameState, gameInterface }) {
               top: y - camera.y,
               transform: 'translate(-50%, -50%)',
               zIndex: Math.floor(y) + BASE_Z_INDEX,
+              filter: 'drop-shadow(2px 4px 6px rgba(0,0,0,0.3))'
             }}
           >
             <Sprite src={ASSETS.buildings.saloon} size={80} />
@@ -283,6 +288,7 @@ function GameStage({ gameState, gameInterface }) {
               top: y - camera.y,
               transform: 'translate(-50%, -50%)',
               zIndex: Math.floor(y) + BASE_Z_INDEX,
+              filter: 'drop-shadow(1px 2px 3px rgba(0,0,0,0.3))'
             }}
           >
             <Sprite src={ASSETS.buildings.cactus} size={60} />
@@ -301,6 +307,7 @@ function GameStage({ gameState, gameInterface }) {
               top: gold.y - camera.y,
               transform: 'translate(-50%, -50%)',
               zIndex: Math.floor(gold.y) + BASE_Z_INDEX + 1,
+              filter: 'drop-shadow(0 1px 2px rgba(0,0,0,0.3))'
             }}
           >
             <Gold />
@@ -319,6 +326,7 @@ function GameStage({ gameState, gameInterface }) {
               top: powerUp.y - camera.y,
               transform: 'translate(-50%, -50%)',
               zIndex: Math.floor(powerUp.y) + BASE_Z_INDEX + 1,
+              filter: 'drop-shadow(0 1px 3px rgba(0,0,0,0.3))'
             }}
           >
             <PowerUp type={powerUp.type} />
@@ -337,6 +345,7 @@ function GameStage({ gameState, gameInterface }) {
               top: bullet.y - camera.y,
               transform: 'translate(-50%, -50%) rotate(' + Math.atan2(bullet.dy, bullet.dx) + 'rad)',
               zIndex: Math.floor(bullet.y) + BASE_Z_INDEX + 2,
+              filter: 'drop-shadow(0 1px 2px rgba(0,0,0,0.5))'
             }}
           >
             <Bullet type={bullet.type} />
@@ -356,10 +365,18 @@ function GameStage({ gameState, gameInterface }) {
               transform: 'translate(-50%, -50%)',
               zIndex: Math.floor(entity.y) + BASE_Z_INDEX + 3,
               opacity: entity.isDead ? 0.7 : 1,
+              filter: entity.isDead ? 'grayscale(0.8)' : 'none'
             }}
           >
             <div className="flex flex-col items-center gap-1">
-              <div style={{ color: 'white', fontSize: '12px', textAlign: 'center', marginBottom: '2px' }}>
+              <div style={{ 
+                color: 'white', 
+                fontSize: '12px', 
+                textAlign: 'center', 
+                marginBottom: '2px',
+                textShadow: '0 1px 2px rgba(0,0,0,0.8)',
+                fontFamily: "'Special Elite', cursive"
+              }}>
                 {entity.name || 'Gunslinger'}
                 {entity.isBot && ' (Bot)'}
               </div>
@@ -371,7 +388,16 @@ function GameStage({ gameState, gameInterface }) {
               
               {/* Weapon indicator */}
               {!entity.isDead && (
-                <div style={{ fontSize: '10px', color: 'white', marginBottom: '2px' }}>
+                <div style={{ 
+                  fontSize: '10px', 
+                  color: 'white', 
+                  marginBottom: '2px',
+                  textShadow: '0 1px 2px rgba(0,0,0,0.8)',
+                  backgroundColor: 'rgba(0,0,0,0.3)',
+                  padding: '1px 3px',
+                  borderRadius: '3px',
+                  fontFamily: "'Special Elite', cursive"
+                }}>
                   {entity.currentWeapon} {entity.ammo}/{entity.maxAmmo}
                 </div>
               )}
@@ -381,6 +407,7 @@ function GameStage({ gameState, gameInterface }) {
                 style={{ 
                   transform: `rotate(${entity.rotation}rad)`,
                   transformOrigin: 'center',
+                  filter: 'drop-shadow(1px 2px 2px rgba(0,0,0,0.5))'
                 }}
               >
                 <Sprite
@@ -394,13 +421,23 @@ function GameStage({ gameState, gameInterface }) {
               
               {/* Power-up indicators */}
               {entity.speedBoost > 0 && (
-                <div style={{ position: 'absolute', top: '-20px', right: '-15px' }}>
+                <div style={{ 
+                  position: 'absolute', 
+                  top: '-20px', 
+                  right: '-15px',
+                  filter: 'drop-shadow(0 1px 2px rgba(0,0,0,0.5))'
+                }}>
                   <Sprite src={ASSETS.powerUps.speed} size={15} />
                 </div>
               )}
               
               {entity.quickReload > 0 && (
-                <div style={{ position: 'absolute', top: '-20px', left: '-15px' }}>
+                <div style={{ 
+                  position: 'absolute', 
+                  top: '-20px', 
+                  left: '-15px',
+                  filter: 'drop-shadow(0 1px 2px rgba(0,0,0,0.5))'
+                }}>
                   <Sprite src={ASSETS.powerUps.quickReload} size={15} />
                 </div>
               )}
