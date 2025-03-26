@@ -1,14 +1,159 @@
 {
   "bundles": [
     {
+      "name": "actions",
+      "assets": [
+        {
+          "alias": "reloading",
+          "src": "assets/actions/reloading.png",
+          "data": {
+            "height": 128,
+            "width": 128
+          }
+        },
+        {
+          "alias": "shooting",
+          "src": "assets/actions/shooting.png",
+          "data": {
+            "height": 128,
+            "width": 128
+          }
+        }
+      ]
+    },
+    {
       "name": "backgrounds",
       "assets": [
+        {
+          "alias": "day",
+          "src": "assets/backgrounds/day.png",
+          "data": {
+            "height": 1024,
+            "width": 1024
+          }
+        },
         {
           "alias": "mainMenu",
           "src": "assets/backgrounds/mainMenuBackground.png",
           "data": {
             "height": 844,
             "width": 390
+          }
+        },
+        {
+          "alias": "night",
+          "src": "assets/backgrounds/night.png",
+          "data": {
+            "height": 1024,
+            "width": 1024
+          }
+        }
+      ]
+    },
+    {
+      "name": "buildings",
+      "assets": [
+        {
+          "alias": "cactus",
+          "src": "assets/buildings/cactus.png",
+          "data": {
+            "height": 256,
+            "width": 128
+          }
+        },
+        {
+          "alias": "saloon",
+          "src": "assets/buildings/saloon.png",
+          "data": {
+            "height": 256,
+            "width": 256
+          }
+        }
+      ]
+    },
+    {
+      "name": "bullets",
+      "assets": [
+        {
+          "alias": "dynamite",
+          "src": "assets/bullets/dynamite.png",
+          "data": {
+            "height": 64,
+            "width": 64
+          }
+        },
+        {
+          "alias": "revolver",
+          "src": "assets/bullets/revolver.png",
+          "data": {
+            "height": 32,
+            "width": 32
+          }
+        },
+        {
+          "alias": "rifle",
+          "src": "assets/bullets/rifle.png",
+          "data": {
+            "height": 32,
+            "width": 48
+          }
+        },
+        {
+          "alias": "shotgun",
+          "src": "assets/bullets/shotgun.png",
+          "data": {
+            "height": 32,
+            "width": 32
+          }
+        }
+      ]
+    },
+    {
+      "name": "characters",
+      "assets": [
+        {
+          "alias": "bountyHunter",
+          "src": "assets/characters/bountyHunter.png",
+          "data": {
+            "height": 128,
+            "width": 128
+          }
+        },
+        {
+          "alias": "dead",
+          "src": "assets/characters/dead.png",
+          "data": {
+            "height": 128,
+            "width": 128
+          }
+        },
+        {
+          "alias": "outlaw",
+          "src": "assets/characters/outlaw.png",
+          "data": {
+            "height": 128,
+            "width": 128
+          }
+        },
+        {
+          "alias": "sheriff",
+          "src": "assets/characters/sheriff.png",
+          "data": {
+            "height": 128,
+            "width": 128
+          }
+        }
+      ]
+    },
+    {
+      "name": "items",
+      "assets": [
+        {
+          "alias": "gold",
+          "src": "assets/items/gold.png",
+          "data": {
+            "height": 64,
+            "width": 64
           }
         }
       ]
@@ -22,6 +167,93 @@
           "data": {
             "height": 80,
             "width": 200
+          }
+        }
+      ]
+    },
+    {
+      "name": "powerUps",
+      "assets": [
+        {
+          "alias": "health",
+          "src": "assets/powerups/health.png",
+          "data": {
+            "height": 64,
+            "width": 64
+          }
+        },
+        {
+          "alias": "quickReload",
+          "src": "assets/powerups/quickReload.png",
+          "data": {
+            "height": 64,
+            "width": 64
+          }
+        },
+        {
+          "alias": "speed",
+          "src": "assets/powerups/speed.png",
+          "data": {
+            "height": 64,
+            "width": 64
+          }
+        }
+      ]
+    },
+    {
+      "name": "ui",
+      "assets": [
+        {
+          "alias": "reload",
+          "src": "assets/ui/reload.png",
+          "data": {
+            "height": 64,
+            "width": 64
+          }
+        },
+        {
+          "alias": "shoot",
+          "src": "assets/ui/shoot.png",
+          "data": {
+            "height": 64,
+            "width": 64
+          }
+        }
+      ]
+    },
+    {
+      "name": "weapons",
+      "assets": [
+        {
+          "alias": "dynamite",
+          "src": "assets/weapons/dynamite.png",
+          "data": {
+            "height": 128,
+            "width": 128
+          }
+        },
+        {
+          "alias": "revolver",
+          "src": "assets/weapons/revolver.png",
+          "data": {
+            "height": 128,
+            "width": 128
+          }
+        },
+        {
+          "alias": "rifle",
+          "src": "assets/weapons/rifle.png",
+          "data": {
+            "height": 128,
+            "width": 128
+          }
+        },
+        {
+          "alias": "shotgun",
+          "src": "assets/weapons/shotgun.png",
+          "data": {
+            "height": 128,
+            "width": 128
           }
         }
       ]
