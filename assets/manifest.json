@@ -1,0 +1,273 @@
+{
+  "bundles": [
+    {
+      "name": "gameAssets",
+      "assets": [
+        {
+          "alias": "background",
+          "src": "assets/backgrounds/background.png",
+          "data": {
+            "width": 1216,
+            "height": 960
+          }
+        },
+        {
+          "alias": "boxArt",
+          "src": "assets/backgrounds/box_art.png",
+          "data": {
+            "width": 390,
+            "height": 844
+          }
+        },
+        {
+          "alias": "firefighter",
+          "src": "assets/characters/firefighter.png",
+          "data": {
+            "width": 80,
+            "height": 120
+          }
+        },
+        {
+          "alias": "dragonSlayerHose",
+          "src": "assets/items/dragon_slayer_hose.png",
+          "data": {
+            "width": 512,
+            "height": 512
+          }
+        },
+        {
+          "alias": "emergencyRope",
+          "src": "assets/items/emergency_rope.png",
+          "data": {
+            "width": 512,
+            "height": 512
+          }
+        },
+        {
+          "alias": "firefighterAxe",
+          "src": "assets/items/firefighter_axe.png",
+          "data": {
+            "width": 512,
+            "height": 512
+          }
+        },
+        {
+          "alias": "firstAidKit",
+          "src": "assets/items/first_aid_kit.png",
+          "data": {
+            "width": 512,
+            "height": 512
+          }
+        },
+        {
+          "alias": "flameSuppressant",
+          "src": "assets/items/flame_suppressant.png",
+          "data": {
+            "width": 512,
+            "height": 512
+          }
+        },
+        {
+          "alias": "heatShield",
+          "src": "assets/items/heat_shield.png",
+          "data": {
+            "width": 512,
+            "height": 512
+          }
+        },
+        {
+          "alias": "oxygenTank",
+          "src": "assets/items/oxygen_tank.png",
+          "data": {
+            "width": 512,
+            "height": 512
+          }
+        },
+        {
+          "alias": "phoenixShield",
+          "src": "assets/items/phoenix_shield.png",
+          "data": {
+            "width": 512,
+            "height": 512
+          }
+        },
+        {
+          "alias": "protectiveGear",
+          "src": "assets/items/protective_gear.png",
+          "data": {
+            "width": 512,
+            "height": 512
+          }
+        },
+        {
+          "alias": "rescueLadder",
+          "src": "assets/items/rescue_ladder.png",
+          "data": {
+            "width": 512,
+            "height": 512
+          }
+        },
+        {
+          "alias": "thermalScanner",
+          "src": "assets/items/thermal_scanner.png",
+          "data": {
+            "width": 512,
+            "height": 512
+          }
+        },
+        {
+          "alias": "waterCannon",
+          "src": "assets/items/water_cannon.png",
+          "data": {
+            "width": 512,
+            "height": 512
+          }
+        },
+        {
+          "alias": "burningCity",
+          "src": "assets/locations/burning_city.png",
+          "data": {
+            "width": 390,
+            "height": 844
+          }
+        },
+        {
+          "alias": "burningForest",
+          "src": "assets/locations/burning_forest.png",
+          "data": {
+            "width": 390,
+            "height": 844
+          }
+        },
+        {
+          "alias": "appStore",
+          "src": "assets/app_store.svg",
+          "data": {
+            "width": 120,
+            "height": 50
+          }
+        },
+        {
+          "alias": "playStore",
+          "src": "assets/play_store.png",
+          "data": {
+            "width": 120,
+            "height": 50
+          }
+        },
+        {
+          "alias": "title",
+          "src": "assets/title.png",
+          "data": {
+            "width": 200,
+            "height": 80
+          }
+        },
+        {
+          "alias": "firefighter",
+          "src": "assets/characters/firefighter.png",
+          "data": {
+            "width": 416,
+            "height": 624
+          }
+        },
+        {
+          "alias": "energy",
+          "src": "assets/icons/energy.png",
+          "data": {
+            "width": 512,
+            "height": 512
+          }
+        },
+        {
+          "alias": "heroEmbers",
+          "src": "assets/icons/hero_embers.png",
+          "data": {
+            "width": 512,
+            "height": 512
+          }
+        },
+        {
+          "alias": "rescuePoints",
+          "src": "assets/icons/rescue_points.png",
+          "data": {
+            "width": 512,
+            "height": 512
+          }
+        },
+        {
+          "alias": "firefighter",
+          "src": "assets/characters/firefighter.png",
+          "data": {
+            "width": 416,
+            "height": 624
+          }
+        },
+        {
+          "alias": "firefighter",
+          "src": "assets/characters/firefighter.png",
+          "data": {
+            "width": 416,
+            "height": 624
+          }
+        },
+        {
+          "alias": "arsonist",
+          "src": "assets/characters/arsonist.png",
+          "data": {
+            "width": 80,
+            "height": 120
+          }
+        },
+        {
+          "alias": "ashGolem",
+          "src": "assets/characters/ash_golem.png",
+          "data": {
+            "width": 80,
+            "height": 120
+          }
+        },
+        {
+          "alias": "emberWitch",
+          "src": "assets/characters/ember_witch.png",
+          "data": {
+            "width": 80,
+            "height": 120
+          }
+        },
+        {
+          "alias": "firefighter",
+          "src": "assets/characters/firefighter.png",
+          "data": {
+            "width": 80,
+            "height": 120
+          }
+        },
+        {
+          "alias": "infernoBeast",
+          "src": "assets/characters/inferno_beast.png",
+          "data": {
+            "width": 80,
+            "height": 120
+          }
+        },
+        {
+          "alias": "smoke-phantom",
+          "src": "assets/characters/smoke_phantom.png",
+          "data": {
+            "width": 80,
+            "height": 120
+          }
+        },
+        {
+          "alias": "wildfire",
+          "src": "assets/characters/wildfire.png",
+          "data": {
+            "width": 80,
+            "height": 120
+          }
+        }
+      ]
+    }
+  ]
+}

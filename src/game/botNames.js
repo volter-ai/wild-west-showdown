@@ -1,0 +1,22 @@
+export const BOT_NAMES = [
+  "xX_Shadow_Xx",
+  "ProGamer2023",
+  "Dark_Knight_99",
+  "Gaming_Legend_",
+  "Epic_Sniper_420",
+  "NotABot_lol",
+  "Player_8264",
+  "GamerBoy2010",
+  "TTV_StreamerBTW",
+  "iPlayFortnite",
+  "MLG_Pro_365",
+  "TheRealDeal_123",
+  "GG_EZ_Player",
+  "NoScope_King",
+  "CoolKid_2008",
+  "Gaming_Master_64",
+  "ProPlayer_4Life",
+  "TheGoat_999",
+  "Sweaty_Gamer",
+  "ImNotTryhard"
+];

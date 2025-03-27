@@ -1,0 +1,56 @@
+name: "Game Terraform Apply"
+on:
+  workflow_dispatch:
+    inputs:
+      deploy_to_prod:
+        description: "Deploy to production?"
+        required: true
+        default: "false"
+        type: choice
+        options:
+          - "true"
+          - "false"
+
+jobs:
+  deploy_dev:
+    uses: ./.github/workflows/terraform-deploy.yml
+    with:
+      environment: "development"
+      working_directory: "./deploy"
+    secrets:
+      TF_API_TOKEN: ${{ secrets.TF_GH_ENTERPRISE_TOKEN }}
+      supabase_key: ${{ secrets.SUPABASE_ORGANIZATION_KEY }}
+      supabase_url: ${{ secrets.SUPABASE_ORGANIZATION_URL }}
+      deepfrai_supabase_url: ${{ secrets.DEEPFRAI_SUPABASE_URL }}
+      deepfrai_supabase_service_role_key: ${{ secrets.DEEPFRAI_SUPABASE_SERVICE_ROLE_KEY }}
+
+#  manual_approval:
+#    needs: deploy_dev
+#    runs-on: ubuntu-latest
+#    if: github.event_name == 'push'
+#    steps:
+#      - name: Manual Approval
+#        uses: trstringer/manual-approval@v1
+#        with:
+#          secret: ${{ secrets.GITHUB_TOKEN }}
+#          approvers: kiorq,mitburr,oliver-io,andrew-stelmach,yueranyuan,dirkbrnd,edmundmtang
+#          minimum-approvals: 1
+#          exclude-workflow-initiator-as-approver: false
+#
+#  deploy_prod:
+#    needs:
+#      - deploy_dev
+#      - manual_approval
+#    if: |
+#      always() &&
+#      (github.event_name == 'workflow_dispatch' && github.event.inputs.deploy_to_prod == 'true') ||
+#      (github.event_name == 'push' && needs.manual_approval.result == 'success')
+#    uses: ./.github/workflows/terraform-deploy.yml
+#    with:
+#      environment: "prod"
+#      working_directory: "./deploy"
+#    secrets:
+#      TF_API_TOKEN: ${{ secrets.TF_GH_ENTERPRISE_TOKEN }}
+#      supabase_key: ${{ secrets.SUPABASE_ORGANIZATION_KEY }}
+#      supabase_url: ${{ secrets.SUPABASE_ORGANIZATION_URL }}
+#      NODE_ENV: "production"
