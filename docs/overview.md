@@ -1,28 +1,7 @@
-# wild_west_showdown
 
-# Core
-
-## Core Concept
-A competitive game for the phone where {describe game here}
-
-Player count:
-{min and max players}
-
-## Controls
-{Describe the controls - is it on screen joystick? etc.}
-
-## Stage
-{Describe what goes on the game stage i.e. food, characters, etc.)
-
-## Game Results
-{Winners and losers and the rules on that}
-
-## Gameplay Elements
-Setup:
-{How the game starts}
-
-Movement:
-{How and where the entities in the game can move}
-
-{Other features}
-{describe each feature here}
+        # Wild West Showdown
+        A multiplayer game set in the Wild West where players compete as cowboys/cowgirls in a frontier town. 
+        Players can engage in shootouts, gold mining, horse racing, and other wild west activities. 
+        The game features both human players and AI-controlled characters (bots) to ensure there's always action happening.
+        Players can form posses (teams) or play as lone wolves in this frontier adventure.
+        
